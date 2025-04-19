@@ -38,8 +38,9 @@ jobs:
       - name: Run tests
         run: |
           cd build
-          ctest --output-on-failure
-
+          ctest --output-on-failure -E "QtTests|QmlTests" # d'abord exclure temporairement les tests graphiques
+          QT_QPA_PLATFORM=offscreen ctest --output-on-failure -R "QtTests|QmlTests" 
+          
       - name: Package binary
         run: |
           mkdir package
