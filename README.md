@@ -10,9 +10,26 @@ Prérequis :
 - CMake 3.22+
 - Ninja (optionnel pour accélérer)
 
-```bash
+
 git clone https://github.com/<ton-username>/cyber-ribouldingue-test-linux.git
 cd cyber-ribouldingue-test-linux
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ./build/TestApp
+
+Lancer les tests
+
+cd build
+ctest --output-on-failure
+
+GitHub Actions
+
+À chaque push sur main, le dépôt :
+
+    Compile le projet
+
+    Exécute tous les tests
+
+    Produit un zip contenant TestApp
+
+Artifacts téléchargeables sur chaque build réussi.
