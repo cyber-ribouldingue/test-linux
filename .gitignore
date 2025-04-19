@@ -1,0 +1,65 @@
+# Build folders
+build/
+build-*/
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+install_manifest.txt
+
+# Qt generated files
+moc_*.cpp
+moc_*.h
+ui_*.h
+qrc_*.cpp
+
+# Test output
+Testing/
+
+# Temporary files
+*.autosave
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# Compiled object files
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.exe
+
+# IDE folders
+.vscode/
+.idea/
+
+# Qt Creator specific
+*.pro.user
+*.qbs.user
+*.pro.user.*
+*.qbs.user.*
+
+# User-specific files
+*.user
+*.user.*
+
+# Crash reports
+core
+
+# Coverage and debug info
+*.gcno
+*.gcda
+*.profraw
+*.profdata
+
+# Artifacts
+*.zip
+
+# macOS hidden files (just in case)
+.DS_Store
