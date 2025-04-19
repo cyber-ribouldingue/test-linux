@@ -1,0 +1,53 @@
+name: Build & Test (Linux)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  BUILD_TYPE: Release
+  QT_VERSION: 6.8.3
+
+jobs:
+  build-linux:
+    name: Build and Test on Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ninja-build clang lcov
+
+      - name: Configure project
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+
+      - name: Build project
+        run: cmake --build build --config ${{ env.BUILD_TYPE }}
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+      - name: Package binary
+        run: |
+          mkdir package
+          cp build/TestApp package/
+          zip -r TestApp-linux.zip package/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestApp-linux
+          path: TestApp-linux.zip
